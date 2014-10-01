@@ -1,7 +1,19 @@
-diff -aurN dunst-1.0.0.orig/Makefile dunst-1.0.0/Makefile
---- dunst-1.0.0.orig/Makefile	2013-08-10 12:55:02.417561338 +0200
-+++ dunst-1.0.0/Makefile	2013-08-10 12:56:35.346433310 +0200
-@@ -19,6 +19,7 @@
+diff -aurN dunst-1.1.0.orig/config.mk dunst-1.1.0/config.mk
+--- dunst-1.1.0.orig/config.mk	2014-10-01 22:20:31.000000000 +0200
++++ dunst-1.1.0/config.mk	2014-10-01 22:22:36.000000000 +0200
+@@ -37,7 +37,7 @@
+ # includes and libs
+ INCS := $(shell ${PKG_CONFIG} --cflags ${pkg_config_packs})
+ CFLAGS += ${INCS}
+-LDFLAGS += -lm -L${X11LIB} -lXss ${XINERAMALIBS} $(shell ${PKG_CONFIG} --libs ${pkg_config_packs})
++LIBS += -lm -L${X11LIB} -lXss ${XINERAMALIBS} $(shell ${PKG_CONFIG} --libs ${pkg_config_packs})
+ 
+ # only make this an fatal error when where not cleaning
+ ifneq (clean, $(MAKECMDGOALS))
+diff -aurN dunst-1.1.0.orig/Makefile dunst-1.1.0/Makefile
+--- dunst-1.1.0.orig/Makefile	2014-10-01 22:20:31.000000000 +0200
++++ dunst-1.1.0/Makefile	2014-10-01 22:22:15.000000000 +0200
+@@ -24,6 +24,7 @@
  options:
  	@echo dunst build options:
  	@echo "CFLAGS   = ${CFLAGS}"
@@ -9,11 +21,13 @@ diff -aurN dunst-1.0.0.orig/Makefile dunst-1.0.0/Makefile
  	@echo "LDFLAGS  = ${LDFLAGS}"
  	@echo "CC       = ${CC}"
  
-@@ -34,14 +35,14 @@
+@@ -39,15 +40,15 @@
+ 	@cp $< $@
  
  dunst: ${OBJ}
- 	@echo CC -o $@
+-	@echo "${CC} ${CFLAGS} -o $@ ${OBJ} ${LDFLAGS}"
 -	@${CC} ${CFLAGS} -o $@ ${OBJ} ${LDFLAGS}
++	@echo "${CC} ${LDFLAGS} ${CFLAGS} -o $@ ${OBJ} ${LIBS}"
 +	@${CC} ${LDFLAGS} ${CFLAGS} -o $@ ${OBJ} ${LIBS}
  
  dunstify:
@@ -26,15 +40,3 @@ diff -aurN dunst-1.0.0.orig/Makefile dunst-1.0.0/Makefile
  
  clean:
  	@echo cleaning
-diff -aurN dunst-1.0.0.orig/config.mk dunst-1.0.0/config.mk
---- dunst-1.0.0.orig/config.mk	2013-08-10 12:55:02.417561338 +0200
-+++ dunst-1.0.0/config.mk	2013-08-10 12:55:29.312871170 +0200
-@@ -35,7 +35,7 @@
- # includes and libs
- INCS := $(shell ${PKG_CONFIG} --cflags ${pkg_config_packs})
- CFLAGS += ${INCS}
--LDFLAGS += -lm -L${X11LIB} -lXss ${XINERAMALIBS} $(shell ${PKG_CONFIG} --libs ${pkg_config_packs})
-+LIBS += -lm -L${X11LIB} -lXss ${XINERAMALIBS} $(shell ${PKG_CONFIG} --libs ${pkg_config_packs})
- 
- # only make this an fatal error when where not cleaning
- ifneq (clean, $(MAKECMDGOALS))

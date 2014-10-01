@@ -1,11 +1,11 @@
 Summary:	A customizable and lightweight notification-daemon
 Name:		dunst
-Version:	1.0.0
+Version:	1.1.0
 Release:	1
 License:	BSD
 Group:		X11/Applications
 Source0:	http://www.knopwob.org/public/dunst-release/%{name}-%{version}.tar.bz2
-# Source0-md5:	bb5fee3cdf6ee30f7e11b7edd35e6723
+# Source0-md5:	7c37fb5306012fd658839908479dbbed
 Patch0:		%{name}-libs.patch
 BuildRequires:	cairo-devel
 BuildRequires:	glib-devel
